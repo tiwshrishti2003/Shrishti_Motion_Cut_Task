@@ -1,0 +1,120 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package com.finexp{
+    InterfaceExpense <|.. MgrExpense
+    MgrExpense "0..1" *-- "0..*" Expense : use
+    Expense +-- Category
+    MgrExpense --> UtilFile : "File Process r/w"
+
+    MgrExpense "0..1" *-- "0..*" UserSummz : use
+    MgrExpense "0..1" *-- "0..*" CatgSummz : use
+    CatgSummz +-- Category
+    UserSummz +-- Category
+
+class UtilFile {
+~ {static} UtilFile utilx
++ {static} String EXP_FILE
++ {static} UtilFile get_file_instance()
++ boolean check_file()
++ List<String> readFromfile()
++ void writeToFile(List<String>)
+}
+class CatgSummz {
+- Category catid
+- float total
++ Category getCatid()
++ void setCatid(Category)
++ float getTotal()
++ void setTotal(float)
++ String toString()
+}
+class UserSummz {
+- String uid
+- float total
++ String getUid()
++ void setUid(String)
++ float getTotal()
++ void setTotal(float)
++ String toString()
+}
+class Expense {
+- int expId
+- String uid
+- String name
+- Category catid
+- String desc
+- Date date
+- float amount
++ int getExpId()
++ void setExpId(int)
++ String getUid()
++ void setUid(String)
++ String getName()
++ void setName(String)
++ Category getCatid()
++ void setCatid(Category)
++ String getDesc()
++ void setDesc(String)
++ Date getDate()
++ void setDate(Date)
++ float getAmount()
++ void setAmount(float)
++ String toString()
+}
+class MgrExpense {
+- {static} int NUM_OF_COLUMNS
+- List<Expense> lst_exp
+- List<String> lst_lines
+- UtilFile util
+- {static} MgrExpense mgx
++ {static} MgrExpense get_manager_instance()
+- void bld_lst_lines()
+- void load_exp_from_lines()
++ void addExpense(String)
++ List<String> viewExpense(String)
+- List<String> get_unique_uids()
++ List<UserSummz> summaryExpense_by_timeline(String,String)
+- Date get_date_from_str(String)
+- boolean valid_date(String)
+- boolean valid_ctg(String)
+- Category get_catg(String)
+- List<Category> get_unique_ctgs()
++ List<CatgSummz> summaryExpense_by_category()
++ boolean validateExpense(String)
+- void gen_write_lines()
++ void write_lst_lines()
++ int get_unique_key()
+}
+interface InterfaceExpense {
+~ void addExpense(String)
+~ List<String> viewExpense(String)
+~ List<UserSummz> summaryExpense_by_timeline(String,String)
+~ List<CatgSummz> summaryExpense_by_category()
+~ boolean validateExpense(String)
+}
+enum Category {
++  Grocery
++  Transportation
++  Stationery
++  Decoration
++  Clothes
+}
+
+}
+package com.uifinexp{
+    Mainfin --> MgrExpense : invokes
+
+class Mainfin {
++ {static} void main(String[])
++ void disp_menu()
++ void add_exp()
++ void disp_exp()
++ void summ_catg()
++ void summ_timeline()
++ void save_exp()
++ void enter_data()
++ {static} void prc_ui()
+}
+}
+@enduml

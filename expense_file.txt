@@ -1,0 +1,5 @@
+1000,U001,Fiona,Grocery,Rice,10/12/2023,456.87
+1001,U001,Fiona,Stationery,Pencil,10/11/2023,345.65
+1002,U002,Devin,Grocery,Rice,10/04/2023,234.50
+1003,U003,Fakhir,Transportation,Lahore,10/02/2023,8765.09
+1004,U004,Georgia,Stationery,Penpencil,10/03/2023,234.23
