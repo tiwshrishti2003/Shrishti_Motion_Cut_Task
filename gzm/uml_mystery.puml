@@ -1,0 +1,77 @@
+@startuml
+package "com.gzm" {
+Chamber "1" *-- "0..1" Artifact : "has"
+AdventureArena --> Competitor : "competes"
+AdventureArena --> Asura : creates
+AdventureArena  --> Artifact : creates
+AdventureArena --> Util
+Chamber "1" --> "0..1" Asura : "has"
+Chamber "0..1" *--> "1..4" Chamber : ExitPoints
+AdventureArena "0..1" --* "1..*" Chamber : "has multiple dynamic halls"
+
+class Asura {
+- String name
+- int stamina
+- int hit
++ String getName()
++ int getStamina()
++ int getHit()
++ void takeHit(int)
+}
+class AdventureArena {
+- {static} String[] iconImage
+- {static} int NUM_HALLS
++ {static} void main(String[])
++ {static} void disp_preamble(int)
++ {static} void prc_arena()
++ {static} void engageFight(Competitor,Asura)
+- {static} List<String>[] get_file_data()
+- {static} void disp_data(List<String>[])
+- {static} List<Integer> get_uniq_num(int)
++ {static} Chamber createArenaPalace()
+}
+class Chamber {
+- String name
+- String desc
+- Asura asura
+- Artifact artifact
+- Chamber[] chamber_exit
++ String getName()
++ String getDesc()
++ void setChamber_exit(Chamber,Chamber,Chamber,Chamber)
++ Asura getAsura()
++ void setAsura(Asura)
++ Artifact getArtifact()
++ void setArtifact(Artifact)
++ Chamber get_exit(int)
++ {static} void createExitPoints(Chamber,Chamber,Chamber,Chamber,Chamber)
++ String toString()
+}
+class Util {
+- {static} String[] fnames
+- {static} String fpath
+- {static} boolean check_fname_valid(String)
++ {static} List<String> readFromFile(String)
++ {static} List<String> shuffle_data(List<String>)
++ {static} List<String> shuffle_data_ignore_first_last_endpoints(List<String>)
++ {static} List<String> shuffle_data_ignore_endpoints(List<String>)
+}
+class Artifact {
+- String name
+- int energyInc
+- int energyDec
++ String getName()
++ int getEnergyInc()
++ int getEnergyDec()
+}
+class Competitor {
+- String name
+- int stamina
+- int hit
++ String getName()
++ int getStamina()
++ int getHit()
++ void takeHit(int)
+}
+}
+@enduml

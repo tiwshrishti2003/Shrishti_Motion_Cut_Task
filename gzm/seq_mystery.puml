@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+AdventureArena -> AdventureArena: prc_arena() - Initate
+AdventureArena -> Competitor : Competitor() - create
+AdventureArena -> AdventureArena: disp_preamble() - Story
+AdventureArena -> AdventureArena: createArenaPalace() - areana created
+AdventureArena -> AdventureArena: get_file_data()
+AdventureArena -> Util: readFromFile()
+AdventureArena -> Util: shuffle_data()
+AdventureArena -> Util: shuffle_data_ignore_endpoints()
+AdventureArena -> Util: shuffle_data_ignore_first_last_endpoints()
+AdventureArena -> Chamber : Chamber() : creates
+AdventureArena -> Asura : Asura() : creates
+AdventureArena -> Asura : takeHit() : set hit
+AdventureArena -> Chamber :  setAsura() : Place Asura in Chamber
+AdventureArena -> Artifact : Artifact() : creates
+AdventureArena -> Chamber : setArtifact() : Place Artifact in Chamber
+AdventureArena -> Chamber : createExitPoints() - Set exit points of chamber
+AdventureArena -> AdventureArena: engageFight - Fight between Competitor & Asura
+AdventureArena -> Competitor : takeHit() - update Stamina of Competitor
+AdventureArena -> Asura : takeHit() - update Stamina of Asura
+AdventureArena -> Artifact : getArtifact()
+AdventureArena -> Competitor : takeHit() - update Stamina of Competitor
+
+
+
+@enduml
